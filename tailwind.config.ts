@@ -1,3 +1,4 @@
+import { text } from "stream/consumers";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -52,6 +53,10 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        profit: "hsl(var(--profit-bg))",
+        loss: "hsl(var(--loss-bg))",
+        profitText: "hsl(var(--profit-text))",
+        lossText: "hsl(var(--loss-text))",
       },
       borderRadius: {
         lg: "var(--radius)",
