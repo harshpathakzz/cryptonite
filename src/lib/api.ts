@@ -11,3 +11,15 @@ export const exploreCoins = async (pageNumber: number) => {
   );
   return response.data;
 };
+
+export const getCoin = async (id: string) => {
+  const response = await axios.get(`/coins/${id}`);
+  return response.data;
+};
+
+export const getCoinMarketChart = async (id: string, days: number) => {
+  const response = await axios.get(
+    `/coins/${id}/market_chart?vs_currency=usd&days=${days}`
+  );
+  return response.data;
+};

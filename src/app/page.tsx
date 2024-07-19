@@ -6,26 +6,40 @@ export default function Home() {
       <ThemeToggle />
       <h1>Hello</h1>
       <SearchBar />
-      <div className="min-h-screen bg-red-500">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum distinctio
-        fuga delectus recusandae! Nam officia deleniti quae? Eum amet hic enim
-        pariatur exercitationem. Omnis voluptate beatae fuga sint distinctio
-        vero velit eveniet, dolorum praesentium facilis? Distinctio neque iure
-        ex quo perferendis! Dicta distinctio similique recusandae dolorem
-        aspernatur eveniet magni adipisci non, dolor eos impedit placeat, quidem
-        rerum temporibus ab cum eligendi. Neque, earum repudiandae. Porro, dolor
-        eos fuga cumque officia fugiat doloribus nam reiciendis inventore?
-        Doloribus sequi reprehenderit nisi beatae, soluta, debitis nulla quas
-        totam vitae ipsum quaerat iure voluptates ea eius necessitatibus sed
-        minima autem nesciunt culpa repudiandae eum. Quo quasi pariatur, sint
-        eveniet ab minima modi ea laudantium! Optio maiores esse vel deleniti
-        eos, praesentium quae perferendis neque illo ullam cupiditate autem odio
-        repudiandae voluptate fugit possimus doloremque, labore modi enim
-        suscipit iste facere. Tenetur non, facilis unde pariatur officia
-        deleniti excepturi distinctio, necessitatibus reiciendis nam, ea omnis
-        laudantium hic neque saepe molestias. Ratione perspiciatis reprehenderit
-        placeat alias fugit cum labore. Et pariatur est iusto omnis quas a ex,
-        rem reprehenderit, corporis rerum explicabo provident eligendi aliquid,
+      <div className="p-4 space-y-4">
+        <div className="bg-primary text-white p-4">--primary</div>
+        <div className="bg-primary-foreground text-black p-4">
+          --primary-foreground
+        </div>
+        <div className="bg-secondary text-black p-4">--secondary</div>
+        <div className="bg-secondary-foreground text-white p-4">
+          --secondary-foreground
+        </div>
+        <div className="bg-muted text-black p-4">--muted</div>
+        <div className="bg-muted-foreground text-white p-4">
+          --muted-foreground
+        </div>
+        <div className="bg-accent text-black p-4">--accent</div>
+        <div className="bg-accent-foreground text-white p-4">
+          --accent-foreground
+        </div>
+        <div className="bg-destructive text-white p-4">--destructive</div>
+        <div className="bg-destructive-foreground text-black p-4">
+          --destructive-foreground
+        </div>
+        <div className="bg-border text-black p-4">--border</div>
+        <div className="bg-input text-black p-4">--input</div>
+        <div className="bg-ring text-black p-4">--ring</div>
+        <div className="bg-background text-black p-4">--background</div>
+        <div className="bg-foreground text-white p-4">--foreground</div>
+        <div className="bg-card text-black p-4">--card</div>
+        <div className="bg-card-foreground text-white p-4">
+          --card-foreground
+        </div>
+        <div className="bg-popover text-black p-4">--popover</div>
+        <div className="bg-popover-foreground text-white p-4">
+          --popover-foreground
+        </div>
       </div>
     </>
   );
