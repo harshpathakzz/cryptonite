@@ -5,7 +5,7 @@ import { exploreCoins } from "@/lib/api";
 import React, { useState, useEffect } from "react";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
 import CoinCard from "@/components/CoinCard";
-import Link from 'next/link'
+
 export default function ExplorePage() {
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -34,7 +34,6 @@ export default function ExplorePage() {
       ) : (
         <div>
           <ul className="list-none p-0">
-            <Link
             {data?.map((coin: any) => (
               <CoinCard key={coin.id} coin={coin} />
             ))}
