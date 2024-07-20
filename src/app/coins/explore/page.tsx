@@ -4,6 +4,7 @@ import { exploreCoins } from "@/lib/api";
 import React, { useState } from "react";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
 import CoinCard from "@/components/CoinCard";
+import Link from "next/link";
 
 export default function ExplorePage() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -31,7 +32,9 @@ export default function ExplorePage() {
           <div className="w-full">
             <ul className="list-none p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {data?.map((coin: any) => (
-                <CoinCard key={coin.id} coin={coin} />
+                <Link href={`/coins/${coin.id}`} key={coin.id}>
+                  <CoinCard key={coin.id} coin={coin} />
+                </Link>
               ))}
             </ul>
             {isFetching && <p className="text-center">Updating...</p>}

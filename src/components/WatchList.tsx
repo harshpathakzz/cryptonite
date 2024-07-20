@@ -3,6 +3,7 @@ import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { useWatchlistStore } from "@/store/watchListStore";
 import { Trash2 } from "lucide-react";
+import Link from "next/link";
 
 export default function Watchlist() {
   const { setNodeRef } = useDroppable({ id: "watchlist" });
@@ -16,19 +17,24 @@ export default function Watchlist() {
       <h2 className="text-xl font-bold mb-4">Watchlist</h2>
       <ul>
         {watchlist.map((item) => (
-          <li
-            key={item.id}
-            className="flex justify-between items-center mb-2 bg-background p-2 rounded-lg"
-          >
-            <span>{item.name}</span>
+          <Link href={`/coins/${item.id}`} key={item.id}>
+            <div
+              key={item.id}
+              className=" w-full flex justify-between items-center mb-2 bg-background p-2 rounded-lg hover:bg-accent"
+            >
+              <span>{item.name}</span>
 
-            <Trash2
-              size={24}
-              onClick={() => removeFromWatchlist(item.id)}
-              color="red"
-              className="cursor-pointer"
-            />
-          </li>
+              <Trash2
+                size={24}
+                onClick={(e) => {
+                  removeFromWatchlist(item.id);
+                  e.stopPropagation();
+                }}
+                color="red"
+                className="cursor-pointer"
+              />
+            </div>
+          </Link>
         ))}
       </ul>
     </div>
