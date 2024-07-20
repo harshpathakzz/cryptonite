@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Chip from "./Chip";
-import { TrendingUp, TrendingDown, DollarSign, BarChart2 } from "lucide-react";
+import { DollarSign, BarChart2 } from "lucide-react";
+import { useDraggable } from "@dnd-kit/core";
 
 interface CoinData {
   id: string;
@@ -18,14 +20,38 @@ interface CoinData {
   low_24h: number;
 }
 
-const CoinCard: React.FC<{ coin: CoinData }> = ({ coin }) => {
-  console.log("Coin", coin);
+interface CoinCardProps {
+  coin: CoinData;
+  isDragging?: boolean;
+}
+
+const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
   const chipVariant = coin.price_change_percentage_24h >= 0 ? "profit" : "loss";
   const weeklyChipVariant =
     coin.price_change_percentage_7d_in_currency >= 0 ? "profit" : "loss";
 
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: coin.id,
+    data: coin,
+  });
+
+  const style =
+    transform && !isDragging
+      ? {
+          transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        }
+      : undefined;
+
   return (
-    <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 flex flex-col border hover:shadow-lg transition-shadow duration-300">
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={`bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300 cursor-move ${
+        isDragging ? "opacity-50" : ""
+      }`}
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <Image
@@ -36,20 +62,19 @@ const CoinCard: React.FC<{ coin: CoinData }> = ({ coin }) => {
             className="rounded-full mr-3"
           />
           <div>
-            <h2 className="text-lg sm:text-xl font-bold">{coin.name}</h2>
-            <span className="text-xs sm:text-sm text-muted-foreground">
+            <h2 className="text-base font-bold sm:text-lg">{coin.name}</h2>
+            <span className="text-xs text-muted-foreground sm:text-sm">
               {coin.symbol.toUpperCase()}
             </span>
           </div>
         </div>
-        <div className="text-xs sm:text-sm font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded">
+        <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
           Rank #{coin.market_cap_rank}
         </div>
       </div>
-
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="flex justify-between items-end mb-4">
         <div>
-          <span className="text-2xl sm:text-3xl font-bold">
+          <span className="text-xl font-bold sm:text-2xl">
             ${coin.current_price.toLocaleString()}
           </span>
         </div>
@@ -61,15 +86,14 @@ const CoinCard: React.FC<{ coin: CoinData }> = ({ coin }) => {
           <span className="text-xs text-muted-foreground mt-1">24h change</span>
         </div>
       </div>
-
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div className="flex items-start">
+      <div className="flex flex-col mb-4">
+        <div className="flex items-start mb-2">
           <DollarSign className="w-4 h-4 mr-2 text-muted-foreground mt-1" />
           <div>
-            <span className="text-xs sm:text-sm text-muted-foreground">
+            <span className="text-xs text-muted-foreground sm:text-sm">
               Market Cap
             </span>
-            <p className="text-sm sm:text-base font-semibold">
+            <p className="text-sm font-semibold sm:text-base">
               ${coin.market_cap.toLocaleString()}
             </p>
           </div>
@@ -77,22 +101,21 @@ const CoinCard: React.FC<{ coin: CoinData }> = ({ coin }) => {
         <div className="flex items-start">
           <BarChart2 className="w-4 h-4 mr-2 text-muted-foreground mt-1" />
           <div>
-            <span className="text-xs sm:text-sm text-muted-foreground">
+            <span className="text-xs text-muted-foreground sm:text-sm">
               Volume (24h)
             </span>
-            <p className="text-sm sm:text-base font-semibold">
+            <p className="text-sm font-semibold sm:text-base">
               ${coin.total_volume.toLocaleString()}
             </p>
           </div>
         </div>
       </div>
-
-      <div className="grid grid-cols-2 gap-4 items-end">
+      <div className="flex justify-between items-end">
         <div>
-          <span className="text-xs sm:text-sm text-muted-foreground">
+          <span className="text-xs text-muted-foreground sm:text-sm">
             24h Low / High
           </span>
-          <p className="text-sm sm:text-base font-semibold">
+          <p className="text-sm font-semibold sm:text-base">
             ${coin.low_24h.toLocaleString()} / ${coin.high_24h.toLocaleString()}
           </p>
         </div>

@@ -1,10 +1,9 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { exploreCoins } from "@/lib/api";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
 import CoinCard from "@/components/CoinCard";
-import CoinTableHeader from "@/components/CoinTableHeader";
 
 export default function ExplorePage() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -13,10 +12,6 @@ export default function ExplorePage() {
     queryFn: () => exploreCoins(pageNumber),
   });
 
-  useEffect(() => {
-    console.log("Data:", data);
-  }, [data]);
-
   const handlePageChange = (newPage: number) => {
     if (newPage > 0) {
       setPageNumber(newPage);
@@ -24,15 +19,17 @@ export default function ExplorePage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 ">
-      <div className="w-full mx-auto ">
+    <div className="container mx-auto px-4 py-8">
+      <div className="w-full mx-auto">
         {isLoading ? (
           <p className="text-center">Loading...</p>
         ) : error ? (
-          <p className="text-red-500 text-center">Error: {error.message}</p>
+          <p className="text-red-500 text-center">
+            Error: {(error as Error).message}
+          </p>
         ) : (
           <div className="w-full">
-            <ul className="list-none p-0">
+            <ul className="list-none p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {data?.map((coin: any) => (
                 <CoinCard key={coin.id} coin={coin} />
               ))}
