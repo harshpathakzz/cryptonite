@@ -6,9 +6,18 @@ export const searchCoin = async (query: string) => {
 };
 
 export const exploreCoins = async (pageNumber: number) => {
-  const response = await axios.get(
-    `/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=${pageNumber}&sparkline=true&price_change_percentage=1h%2C%2024h%2C%207d%2C%2014d%2C%2030d%2C%20200d%2C%201y%20&locale=en&precision=2`
-  );
+  const response = await axios.get(`/coins/markets`, {
+    params: {
+      vs_currency: "usd",
+      order: "market_cap_desc",
+      per_page: 20,
+      page: pageNumber,
+      sparkline: false,
+      price_change_percentage: "1h,24h,7d,14d,30d,200d,1y",
+      locale: "en",
+      precision: 2,
+    },
+  });
   return response.data;
 };
 
@@ -21,5 +30,22 @@ export const getCoinMarketChart = async (id: string, days: number) => {
   const response = await axios.get(
     `/coins/${id}/market_chart?vs_currency=usd&days=${days}`
   );
+  return response.data;
+};
+
+export const getWatchListCoins = async (ids: string[]) => {
+  const response = await axios.get(`/coins/markets`, {
+    params: {
+      vs_currency: "usd",
+      ids: ids.join(","),
+      order: "market_cap_desc",
+      per_page: 250,
+      page: 1,
+      sparkline: false,
+      price_change_percentage: "1h,24h,7d,14d,30d,200d,1y",
+      locale: "en",
+      precision: 2,
+    },
+  });
   return response.data;
 };
