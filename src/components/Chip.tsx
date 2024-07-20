@@ -7,7 +7,6 @@ interface ChipProps {
 }
 
 const Chip: React.FC<ChipProps> = ({ variant = "default", text }) => {
-  console.log("Rendered chip");
   return (
     <span
       className={cn(
