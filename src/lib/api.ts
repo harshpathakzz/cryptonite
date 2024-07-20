@@ -54,3 +54,8 @@ export const getTrendingCoins = async () => {
   const response = await axios.get(`/search/trending`);
   return response.data.coins;
 };
+
+export const getPublicCompaniesHoldings = async (query: string) => {
+  const response = await axios.get(`/companies/public_treasury/${query}`);
+  return response.data;
+};
