@@ -49,3 +49,8 @@ export const getWatchListCoins = async (ids: string[]) => {
   });
   return response.data;
 };
+
+export const getTrendingCoins = async () => {
+  const response = await axios.get(`/search/trending`);
+  return response.data.coins;
+};
