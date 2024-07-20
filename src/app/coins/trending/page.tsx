@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTrendingCoins } from "@/lib/api";
 import TrendingCoinCard from "@/components/TrendingCoinCard";
+import Link from "next/link";
 
 export default function ExplorePage() {
   const { isLoading, error, data } = useQuery({
@@ -21,7 +22,9 @@ export default function ExplorePage() {
         ) : (
           <div className="w-full">
             {data?.map((coin: any) => (
-              <TrendingCoinCard key={coin.item.id} coin={coin} />
+              <Link href={`/coins/${coin.item.id}`} key={coin.item.id}>
+                <TrendingCoinCard key={coin.item.id} coin={coin} />
+              </Link>
             ))}
           </div>
         )}
