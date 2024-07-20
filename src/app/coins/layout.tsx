@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import WatchList from "@/components/WatchList";
 import { useWatchlistStore } from "@/store/watchListStore";
 import CoinCard from "@/components/CoinCard";
+import TrendingCoinCard from "@/components/TrendingCoinCard";
 
 export default function CoinsLayout({
   children,
@@ -21,7 +22,11 @@ export default function CoinsLayout({
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (over && over.id === "watchlist") {
-      addToWatchlist({ id: active.id, name: active.data.current.name });
+      if (active.data.current.item) {
+        addToWatchlist({ id: active.id, name: active.data.current.item.name });
+      } else {
+        addToWatchlist({ id: active.id, name: active.data.current.name });
+      }
     }
     setActiveCoin(null);
   };
@@ -42,7 +47,13 @@ export default function CoinsLayout({
             </div>
           </div>
           <DragOverlay>
-            {activeCoin ? <CoinCard coin={activeCoin} isDragging /> : null}
+            {activeCoin ? (
+              activeCoin.item ? (
+                <TrendingCoinCard coin={activeCoin} isDragging />
+              ) : (
+                <CoinCard coin={activeCoin} isDragging />
+              )
+            ) : null}
           </DragOverlay>
         </DndContext>
       </div>
