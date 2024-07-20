@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Chip from "./Chip";
-import { DollarSign, BarChart2 } from "lucide-react";
+import { DollarSign, BarChart2, GripVertical } from "lucide-react";
 import { useDraggable } from "@dnd-kit/core";
 
 interface CoinData {
@@ -46,9 +46,7 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
-      className={`bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300 cursor-move ${
+      className={`bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300 ${
         isDragging ? "opacity-50" : ""
       }`}
     >
@@ -70,6 +68,9 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
         </div>
         <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
           Rank #{coin.market_cap_rank}
+        </div>
+        <div {...attributes} {...listeners} className="cursor-move">
+          <GripVertical className="w-6 h-6 text-muted-foreground" />
         </div>
       </div>
       <div className="flex justify-between items-end mb-4">
