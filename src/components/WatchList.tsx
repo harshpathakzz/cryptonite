@@ -10,33 +10,33 @@ export default function Watchlist() {
   const { watchlist, removeFromWatchlist } = useWatchlistStore();
 
   return (
-    <div
-      ref={setNodeRef}
-      className="w-full bg-background p-4 h-full border rounded-md max-h-[60vh] overflow-y-scroll"
-    >
-      <h2 className="text-xl font-bold mb-4">Watchlist</h2>
-      <ul>
-        {watchlist.map((item) => (
-          <Link href={`/coins/${item.id}`} key={item.id}>
-            <div
-              key={item.id}
-              className=" w-full flex justify-between items-center mb-2 bg-background p-2 rounded-lg hover:bg-accent"
-            >
-              <span>{item.name}</span>
-
-              <Trash2
-                size={24}
-                onClick={(e) => {
-                  removeFromWatchlist(item.id);
-                  e.stopPropagation();
-                }}
-                color="red"
-                className="cursor-pointer"
-              />
-            </div>
-          </Link>
-        ))}
-      </ul>
+    <div className="w-full bg-background border rounded-md h-[60vh] flex flex-col">
+      <h2 className="text-xl font-bold p-4 sticky top-0 bg-background z-10 border-b">
+        Watchlist
+      </h2>
+      <div ref={setNodeRef} className="flex-1 overflow-y-auto p-4">
+        <ul>
+          {watchlist.map((item) => (
+            <li key={item.id} className="mb-2">
+              <Link href={`/coins/${item.id}`}>
+                <div className="w-full flex justify-between items-center bg-background p-2 rounded-lg hover:bg-accent">
+                  <span>{item.name}</span>
+                  <Trash2
+                    size={24}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      removeFromWatchlist(item.id);
+                    }}
+                    color="red"
+                    className="cursor-pointer"
+                  />
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
