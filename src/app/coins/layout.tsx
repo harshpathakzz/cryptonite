@@ -6,7 +6,6 @@ import WatchList from "@/components/WatchList";
 import { useWatchlistStore } from "@/store/watchListStore";
 import CoinCard from "@/components/CoinCard";
 import TrendingCoinCard from "@/components/TrendingCoinCard";
-import { Toaster } from "sonner";
 
 export default function CoinsLayout({
   children,
@@ -70,7 +69,6 @@ export default function CoinsLayout({
           </DragOverlay>
         </DndContext>
       </div>
-      {/* <Toaster richColors /> */}
     </section>
   );
 }
