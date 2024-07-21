@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { getPublicCompaniesHoldings } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
+import { Skeleton } from "@/components/Skeleton";
+
+import { useErrorHandling } from "@/hooks/useErrorHandling";
 
 interface Company {
   name: string;
@@ -17,13 +20,16 @@ type CryptoType = "bitcoin" | "ethereum";
 export default function PublicCompaniesHoldings() {
   const [selectedCrypto, setSelectedCrypto] = useState<CryptoType>("bitcoin");
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading, error, data, isError } = useQuery({
     queryKey: ["publicCompaniesHoldings", selectedCrypto],
     queryFn: () => getPublicCompaniesHoldings(selectedCrypto),
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>An error occurred: {error.message}</div>;
+  useErrorHandling(isError, error);
+
+  if (error) {
+    return null;
+  }
 
   return (
     <div>
@@ -35,6 +41,7 @@ export default function PublicCompaniesHoldings() {
               ? "bg-primary text-primary-foreground"
               : "bg-secondary"
           }`}
+          disabled={isLoading}
         >
           BTC
         </button>
@@ -45,46 +52,60 @@ export default function PublicCompaniesHoldings() {
               ? "bg-primary text-primary-foreground"
               : "bg-secondary"
           }`}
+          disabled={isLoading}
         >
           ETH
         </button>
       </div>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-background">
-          <thead>
-            <tr className="bg-background text-foreground uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">Company</th>
-              <th className="py-3 px-6 text-left">Symbol</th>
-              <th className="py-3 px-6 text-left">Country</th>
-              <th className="py-3 px-6 text-right">
-                Total Holdings ({selectedCrypto === "bitcoin" ? "BTC" : "ETH"})
-              </th>
-              <th className="py-3 px-6 text-right">Entry Value (USD)</th>
-              <th className="py-3 px-6 text-right">Current Value (USD)</th>
-            </tr>
-          </thead>
-          <tbody className="text-secondary-foreground text-sm font-light">
-            {data.companies.map((company: Company, index: number) => (
-              <tr key={index} className="border-b border hover:bg-secondary">
-                <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {company.name}
-                </td>
-                <td className="py-3 px-6 text-left">{company.symbol}</td>
-                <td className="py-3 px-6 text-left">{company.country}</td>
-                <td className="py-3 px-6 text-right">
-                  {company.total_holdings.toLocaleString()}
-                </td>
-                <td className="py-3 px-6 text-right">
-                  ${company.total_entry_value_usd.toLocaleString()}
-                </td>
-                <td className="py-3 px-6 text-right">
-                  ${company.total_current_value_usd.toLocaleString()}
-                </td>
+      {isLoading && (
+        <div className="space-y-4">
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+      )}
+
+      {data && (
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-background">
+            <thead>
+              <tr className="bg-background text-foreground uppercase text-sm leading-normal">
+                <th className="py-3 px-6 text-left">Company</th>
+                <th className="py-3 px-6 text-left">Symbol</th>
+                <th className="py-3 px-6 text-left">Country</th>
+                <th className="py-3 px-6 text-right">
+                  Total Holdings ({selectedCrypto === "bitcoin" ? "BTC" : "ETH"}
+                  )
+                </th>
+                <th className="py-3 px-6 text-right">Entry Value (USD)</th>
+                <th className="py-3 px-6 text-right">Current Value (USD)</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody className="text-secondary-foreground text-sm font-light">
+              {data.companies.map((company: Company, index: number) => (
+                <tr key={index} className="border-b border hover:bg-secondary">
+                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                    {company.name}
+                  </td>
+                  <td className="py-3 px-6 text-left">{company.symbol}</td>
+                  <td className="py-3 px-6 text-left">{company.country}</td>
+                  <td className="py-3 px-6 text-right">
+                    {company.total_holdings.toLocaleString()}
+                  </td>
+                  <td className="py-3 px-6 text-right">
+                    ${company.total_entry_value_usd.toLocaleString()}
+                  </td>
+                  <td className="py-3 px-6 text-right">
+                    ${company.total_current_value_usd.toLocaleString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
