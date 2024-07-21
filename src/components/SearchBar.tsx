@@ -4,10 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { searchCoin } from "@/lib/api";
 import useDebounce from "@/hooks/useDebounce";
 import { useErrorHandling } from "@/hooks/useErrorHandling";
+import Link from "next/link";
+import Image from "next/image";
 
 interface Coin {
   id: string;
   name: string;
+  thumb: string;
 }
 
 const SearchBar: React.FC = () => {
@@ -45,7 +48,7 @@ const SearchBar: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col w-1/3 relative" ref={searchBarRef}>
+    <div className="flex flex-col w-full relative" ref={searchBarRef}>
       <div className="relative w-full">
         <input
           type="text"
@@ -83,12 +86,24 @@ const SearchBar: React.FC = () => {
       {isFocused && data && (
         <div className="absolute top-[2.5rem] w-full bg-primary-foreground max-h-[30vh] overflow-y-auto shadow-md rounded-md mt-1 z-10">
           {data.coins.map((coin: Coin) => (
-            <div
-              key={coin.id}
-              className="px-3 py-2 cursor-pointer hover:bg-secondary"
-            >
-              {coin.name}
-            </div>
+            <Link href={`/coins/${coin.id}`} key={coin.id}>
+              <div
+                className="flex flex-row items-center px-3 py-2 cursor-pointer hover:bg-secondary"
+                onClick={() => {
+                  setQuery(coin.name);
+                  setIsFocused(false);
+                }}
+              >
+                <Image
+                  src={coin.thumb}
+                  alt={coin.name}
+                  width={16}
+                  height={16}
+                  className="rounded-full mr-4"
+                />
+                {coin.name}
+              </div>
+            </Link>
           ))}
         </div>
       )}
