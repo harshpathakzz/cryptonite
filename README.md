@@ -40,7 +40,37 @@ Cryptonite is a cryptocurrency tracking application that uses the CoinGecko API 
    - Visualizes market capitalization over time
    - Shows trading volume fluctuations
    - Allows users to toggle between different time frames and metrics for detailed analysis
+
+
+## Demo
+
+
+https://github.com/user-attachments/assets/83805111-efda-454d-8c1d-c73b70342cfd
+
+
    
+
+### Home Page
+
+![image](https://github.com/user-attachments/assets/a50af8e0-a143-42b7-bd2e-f0dcbb3b8fcc)
+
+### Trending Page
+
+![image](https://github.com/user-attachments/assets/cc0c5d02-af49-415b-8ef4-52f2556cc196)
+
+### Explore Page
+
+![image](https://github.com/user-attachments/assets/99297d79-bf3b-4db7-b1dc-663a46726316)
+
+
+### WatchList Page
+
+![image](https://github.com/user-attachments/assets/3a03de68-2cf7-483f-97fa-12f233064835)
+
+### Coin Page
+
+![image](https://github.com/user-attachments/assets/635ee876-9365-4dde-9a02-1e86fd6bf2c0)
+
 
 ## Installation
 
@@ -85,26 +115,13 @@ Follow these steps to set up the Cryptonite application on your local machine:
     After running this command, the application will be available locally at [http://localhost:3000](http://localhost:3000).
 
 
-### Home Page
-
-![image](https://github.com/user-attachments/assets/a50af8e0-a143-42b7-bd2e-f0dcbb3b8fcc)
-
-### Trending Page
-
-![image](https://github.com/user-attachments/assets/cc0c5d02-af49-415b-8ef4-52f2556cc196)
-
-### Explore Page
-
-![image](https://github.com/user-attachments/assets/99297d79-bf3b-4db7-b1dc-663a46726316)
 
 
-### WatchList Page
 
-![image](https://github.com/user-attachments/assets/3a03de68-2cf7-483f-97fa-12f233064835)
 
-### Coin Page
 
-![image](https://github.com/user-attachments/assets/635ee876-9365-4dde-9a02-1e86fd6bf2c0)
+
+
 
 
 
