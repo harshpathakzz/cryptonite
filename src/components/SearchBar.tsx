@@ -23,6 +23,8 @@ const SearchBar: React.FC = () => {
     queryKey: ["searchCoin", debouncedQuery],
     queryFn: () => searchCoin(debouncedQuery),
     enabled: !!debouncedQuery,
+    gcTime: 3600000, //Cache time of 1 hour
+    staleTime: 1800000, //Stale time of 30 min
   });
 
   useEffect(() => {

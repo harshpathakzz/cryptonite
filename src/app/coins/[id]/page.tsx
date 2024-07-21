@@ -69,11 +69,10 @@ const CoinPage: React.FC<CoinPageProps> = ({ params }) => {
   const { data, isLoading, error, isError } = useQuery<CoinData, Error>({
     queryKey: ["getCoin", id],
     queryFn: () => getCoin(id),
+    gcTime: 3600000, //Cache time of 1 hour
+    staleTime: 55000, //Stale time of 55 seconds
+    refetchInterval: 60000, //Refetch every 60 seconds
   });
-
-  useEffect(() => {
-    console.log("Data:", data);
-  }, [data]);
 
   useErrorHandling(isError, error);
 

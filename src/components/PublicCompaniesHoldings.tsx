@@ -23,6 +23,9 @@ export default function PublicCompaniesHoldings() {
   const { isLoading, error, data, isError } = useQuery({
     queryKey: ["publicCompaniesHoldings", selectedCrypto],
     queryFn: () => getPublicCompaniesHoldings(selectedCrypto),
+    gcTime: 3600000, //Cache time of 1 hour
+    staleTime: 55000, //Stale time of 55 seconds
+    refetchInterval: 60000, //Refetch every 60 seconds
   });
 
   useErrorHandling(isError, error);
