@@ -4,6 +4,7 @@ import { useDroppable } from "@dnd-kit/core";
 import { useWatchlistStore } from "@/store/watchListStore";
 import { Trash2 } from "lucide-react";
 import Link from "next/link";
+import Chip from "@/components/Chip";
 
 export default function Watchlist() {
   const { setNodeRef } = useDroppable({ id: "watchlist" });
@@ -20,7 +21,13 @@ export default function Watchlist() {
             <li key={item.id} className="mb-2">
               <Link href={`/coins/${item.id}`}>
                 <div className="w-full flex justify-between items-center bg-background p-2 rounded-lg hover:bg-accent">
-                  <span>{item.name}</span>
+                  <span>{item.symbol.toUpperCase()}</span>
+                  <Chip
+                    text={`${item.price_change_percentage_24h.toFixed(2)}%`}
+                    variant={
+                      item.price_change_percentage_24h >= 0 ? "profit" : "loss"
+                    }
+                  />
                   <Trash2
                     size={24}
                     onClick={(e) => {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Chip from "./Chip";
 import { DollarSign, BarChart2, GripVertical } from "lucide-react";
 import { useDraggable } from "@dnd-kit/core";
+import { WatchListButton } from "./WatchListButton";
 
 interface CoinData {
   id: string;
@@ -69,8 +70,20 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
         <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
           Rank #{coin.market_cap_rank}
         </div>
-        <div {...attributes} {...listeners} className="cursor-move">
+        <div
+          {...attributes}
+          {...listeners}
+          className="cursor-move hidden sm:block"
+        >
           <GripVertical className="w-6 h-6 text-muted-foreground" />
+        </div>
+        <div className="block sm:hidden">
+          <WatchListButton
+            id={coin.id}
+            name={coin.name}
+            price_change_percentage_24h={coin.price_change_percentage_24h}
+            symbol={coin.symbol}
+          />
         </div>
       </div>
       <div className="flex justify-between items-end mb-4">

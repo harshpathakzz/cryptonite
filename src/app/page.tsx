@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Header />
       <div></div>
-      <div>
+      <div className="flex justify-center">
         <PublicCompaniesHoldings />
       </div>
     </>

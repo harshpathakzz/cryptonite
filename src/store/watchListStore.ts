@@ -4,6 +4,8 @@ import { persist } from "zustand/middleware";
 type WatchlistItem = {
   id: string;
   name: string;
+  price_change_percentage_24h: number;
+  symbol: string;
 };
 
 type WatchlistStore = {

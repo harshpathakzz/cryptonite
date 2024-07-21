@@ -32,7 +32,7 @@ export default function PublicCompaniesHoldings() {
   }
 
   return (
-    <div>
+    <div className="w-4/5">
       <div className="mb-4">
         <button
           onClick={() => setSelectedCrypto("bitcoin")}

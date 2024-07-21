@@ -24,9 +24,21 @@ export default function CoinsLayout({
     const { active, over } = event;
     if (over && over.id === "watchlist") {
       if (active.data.current.item) {
-        addToWatchlist({ id: active.id, name: active.data.current.item.name });
+        addToWatchlist({
+          id: active.id,
+          name: active.data.current.item.name,
+          price_change_percentage_24h:
+            active.data.current.item.data.price_change_percentage_24h.usd,
+          symbol: active.data.current.item.symbol,
+        });
       } else {
-        addToWatchlist({ id: active.id, name: active.data.current.name });
+        addToWatchlist({
+          id: active.id,
+          name: active.data.current.name,
+          price_change_percentage_24h:
+            active.data.current.price_change_percentage_24h,
+          symbol: active.data.current.symbol,
+        });
       }
     }
     setActiveCoin(null);

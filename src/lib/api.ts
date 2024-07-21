@@ -10,7 +10,7 @@ export const exploreCoins = async (pageNumber: number) => {
     params: {
       vs_currency: "usd",
       order: "market_cap_desc",
-      per_page: 20,
+      per_page: 21,
       page: pageNumber,
       sparkline: false,
       price_change_percentage: "1h,24h,7d,14d,30d,200d,1y",
