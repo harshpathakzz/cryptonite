@@ -5,10 +5,11 @@ import React, { useState } from "react";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
 import CoinCard from "@/components/CoinCard";
 import Link from "next/link";
-
+import { Skeleton } from "@/components/Skeleton";
+import { useErrorHandling } from "@/hooks/useErrorHandling";
 export default function ExplorePage() {
   const [pageNumber, setPageNumber] = useState(1);
-  const { isLoading, error, data, isFetching } = useQuery({
+  const { isLoading, error, data, isFetching, isError } = useQuery({
     queryKey: ["exploreCoins", pageNumber],
     queryFn: () => exploreCoins(pageNumber),
   });
@@ -18,16 +19,21 @@ export default function ExplorePage() {
       setPageNumber(newPage);
     }
   };
+  useErrorHandling(isError, error);
+
+  if (error) {
+    return null;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="w-full mx-auto">
         {isLoading ? (
-          <p className="text-center">Loading...</p>
-        ) : error ? (
-          <p className="text-red-500 text-center">
-            Error: {(error as Error).message}
-          </p>
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 21 }).map((_, index) => (
+              <Skeleton key={index} className="h-48 w-full" />
+            ))}
+          </div>
         ) : (
           <div className="w-full">
             <ul className="list-none p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
