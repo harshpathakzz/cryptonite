@@ -76,7 +76,7 @@ export default function GlobalChart() {
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Global Crypto Statistics</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="bg-transparent p-4 rounded shadow">
+        <div className="bg-background p-4 rounded shadow border">
           <h2 className="text-xl font-semibold mb-2">
             Active Cryptocurrencies
           </h2>
@@ -84,11 +84,11 @@ export default function GlobalChart() {
             {data.active_cryptocurrencies.toLocaleString()}
           </p>
         </div>
-        <div className="bg-transparent p-4 rounded shadow">
+        <div className="bg-transparent p-4 rounded shadow border">
           <h2 className="text-xl font-semibold mb-2">Markets</h2>
           <p className="text-2xl">{data.markets.toLocaleString()}</p>
         </div>
-        <div className="bg-transparent p-4 rounded shadow">
+        <div className="bg-transparent p-4 rounded shadow border">
           <h2 className="text-xl font-semibold mb-2">Total Market Cap (USD)</h2>
           <p className="text-2xl">
             $
@@ -97,7 +97,7 @@ export default function GlobalChart() {
             })}
           </p>
         </div>
-        <div className="bg-transparent p-4 rounded shadow">
+        <div className="bg-transparent p-4 rounded shadow border">
           <h2 className="text-xl font-semibold mb-2">Total Volume (USD)</h2>
           <p className="text-2xl">
             $
@@ -107,7 +107,7 @@ export default function GlobalChart() {
           </p>
         </div>
       </div>
-      <div className="bg-transparent p-4 rounded shadow">
+      <div className="bg-transparent p-4 rounded shadow ">
         <h2 className="text-xl font-semibold mb-4">
           Market Cap and Percentage (Top 10)
         </h2>

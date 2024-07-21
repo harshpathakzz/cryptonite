@@ -1,10 +1,9 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
-import SearchBar from "@/components/SearchBar";
 import PublicCompaniesHoldings from "@/components/PublicCompaniesHoldings";
 import Header from "@/components/Header";
 import GlobalChart from "@/components/GlobalChart";
 import { Bitcoin, TrendingUp, DollarSign, Zap } from "lucide-react";
 import FeatureCard from "@/components/FeatureCard";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,9 +20,11 @@ export default function Home() {
               Track, analyze, and conquer the crypto market with ease!
             </p>
             <div className="flex space-x-4">
-              <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-                Get Started
-              </button>
+              <Link href={`/coins/trending`}>
+                <button className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+                  Get Started
+                </button>
+              </Link>
             </div>
           </div>
           <div className="md:w-1/2">
@@ -52,12 +53,6 @@ export default function Home() {
             title="Instant Alerts"
             description="Stay informed with customizable price and news alerts"
           />
-        </div>
-
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-primary">
-            Trending Cryptocurrencies
-          </h2>
         </div>
 
         <div className="mb-12">
