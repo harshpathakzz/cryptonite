@@ -3,6 +3,11 @@ import Image from "next/image";
 import Chip from "@/components/Chip";
 import { WatchListButton } from "@/components/WatchListButton";
 import { DollarSign, BarChart2, GripVertical } from "lucide-react";
+import {
+  formatDollarAmount,
+  formatPercentage,
+  formatBigAmount,
+} from "@/utils/formatters";
 
 interface TrendingCoinCardProps {
   coin: {
@@ -14,8 +19,8 @@ interface TrendingCoinCardProps {
       market_cap_rank: number;
       data: {
         price_change_percentage_24h: { usd: number };
-        market_cap: number;
-        total_volume: number;
+        market_cap: string;
+        total_volume: string;
         sparkline: string;
       };
     };
@@ -27,8 +32,16 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
   coin,
   isDragging = false,
 }) => {
-  const priceChange = coin.item.data.price_change_percentage_24h.usd;
-  const priceChangeVariant = priceChange >= 0 ? "profit" : "loss";
+  const priceChange = coin.item.data.price_change_percentage_24h?.usd;
+  const priceChangeVariant = (priceChange || 0) >= 0 ? "profit" : "loss";
+
+  // Helper function to safely parse and format dollar amount
+  const safeFormatDollarAmount = (value: string | undefined) => {
+    if (typeof value !== "string") return "N/A";
+    const numericValue = parseFloat(value.replace(/[^0-9.-]+/g, ""));
+    if (isNaN(numericValue)) return "N/A";
+    return formatBigAmount(numericValue);
+  };
 
   return (
     <div
@@ -57,7 +70,7 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
                 id={coin.item.id}
                 name={coin.item.name}
                 price_change_percentage_24h={
-                  coin.item.data.price_change_percentage_24h.usd
+                  coin.item.data.price_change_percentage_24h?.usd
                 }
                 symbol={coin.item.symbol}
               />
@@ -76,7 +89,7 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
               </span>
               <Chip
                 variant={priceChangeVariant}
-                text={`${priceChange.toFixed(2)}%`}
+                text={formatPercentage(priceChange)}
               />
             </div>
           </div>
@@ -88,7 +101,7 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
                   Market Cap
                 </span>
                 <p className="text-base font-semibold">
-                  {(coin.item.data.market_cap || 0).toLocaleString()}
+                  {safeFormatDollarAmount(coin.item.data.market_cap)}
                 </p>
               </div>
             </div>
@@ -99,7 +112,7 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
                   Volume (24h)
                 </span>
                 <p className="text-base font-semibold">
-                  {(coin.item.data.total_volume || 0).toLocaleString()}
+                  {safeFormatDollarAmount(coin.item.data.total_volume)}
                 </p>
               </div>
             </div>

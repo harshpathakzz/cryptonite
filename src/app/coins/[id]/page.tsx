@@ -12,6 +12,12 @@ import PriceCard from "@/components/PriceCard";
 import InfoCard from "@/components/InfoCard";
 import CoinPageSkeleton from "@/components/CoinPageSkeleton";
 import { WatchListButton } from "@/components/WatchListButton";
+import {
+  formatDollarAmount,
+  formatPercentage,
+  formatLargeNumber,
+  formatBigAmount,
+} from "@/utils/formatters";
 
 interface CoinPageProps {
   params: {
@@ -113,46 +119,50 @@ const CoinPage: React.FC<CoinPageProps> = ({ params }) => {
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <PriceCard
                   label="Current Price"
-                  value={`$${data.market_data.current_price.usd.toLocaleString()}`}
-                  change={data.market_data.price_change_percentage_24h}
+                  value={formatDollarAmount(data.market_data.current_price.usd)}
+                  change={formatPercentage(
+                    data.market_data.price_change_percentage_24h
+                  )}
                 />
                 <InfoCard
                   label="Market Cap"
-                  value={`$${data.market_data.market_cap.usd.toLocaleString()}`}
+                  value={formatDollarAmount(data.market_data.market_cap.usd)}
                   subValue={`Rank #${data.market_cap_rank}`}
                   icon={<BarChart3 className="w-5 h-5" />}
                 />
                 <InfoCard
                   label="24h Trading Volume"
-                  value={`$${data.market_data.total_volume.usd.toLocaleString()}`}
+                  value={formatDollarAmount(data.market_data.total_volume.usd)}
                   icon={<DollarSign className="w-5 h-5" />}
                 />
                 <InfoCard
                   label="Circulating Supply"
-                  value={`${data.market_data.circulating_supply.toLocaleString()} ${data.symbol.toUpperCase()}`}
-                  subValue={`${(
+                  value={`${formatBigAmount(
+                    data.market_data.circulating_supply
+                  )} ${data.symbol.toUpperCase()}`}
+                  subValue={`${formatPercentage(
                     (data.market_data.circulating_supply /
                       data.market_data.total_supply) *
-                    100
-                  ).toFixed(2)}% of total supply`}
+                      100
+                  )} of total supply`}
                   icon={<Coins className="w-5 h-5" />}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <InfoCard
                   label="All-Time High"
-                  value={`$${data.market_data.ath.usd.toLocaleString()}`}
-                  subValue={`${data.market_data.ath_change_percentage.usd.toFixed(
-                    2
-                  )}% from ATH`}
+                  value={formatDollarAmount(data.market_data.ath.usd)}
+                  subValue={`${formatPercentage(
+                    data.market_data.ath_change_percentage.usd
+                  )} from ATH`}
                   icon={<ArrowUp className="w-5 h-5" />}
                 />
                 <InfoCard
                   label="All-Time Low"
-                  value={`$${data.market_data.atl.usd.toLocaleString()}`}
-                  subValue={`${data.market_data.atl_change_percentage.usd.toFixed(
-                    2
-                  )}% from ATL`}
+                  value={formatDollarAmount(data.market_data.atl.usd)}
+                  subValue={`${formatPercentage(
+                    data.market_data.atl_change_percentage.usd
+                  )} from ATL`}
                   icon={<ArrowDown className="w-5 h-5" />}
                 />
               </div>

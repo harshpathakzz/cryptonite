@@ -4,6 +4,7 @@ import Image from "next/image";
 import Chip from "./Chip";
 import { DollarSign, BarChart2, GripVertical } from "lucide-react";
 import { WatchListButton } from "./WatchListButton";
+import { formatDollarAmount, formatPercentage } from "@/utils/formatters";
 
 interface CoinData {
   id: string;
@@ -68,13 +69,13 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
       <div className="flex justify-between items-end mb-4">
         <div>
           <span className="text-xl font-bold sm:text-2xl">
-            ${coin.current_price.toLocaleString()}
+            {formatDollarAmount(coin.current_price)}
           </span>
         </div>
         <div className="flex flex-col items-end">
           <Chip
             variant={chipVariant}
-            text={`${coin.price_change_percentage_24h.toFixed(2)}%`}
+            text={formatPercentage(coin.price_change_percentage_24h)}
           />
           <span className="text-xs text-muted-foreground mt-1">24h change</span>
         </div>
@@ -87,7 +88,7 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
               Market Cap
             </span>
             <p className="text-sm font-semibold sm:text-base">
-              ${coin.market_cap.toLocaleString()}
+              {formatDollarAmount(coin.market_cap)}
             </p>
           </div>
         </div>
@@ -98,7 +99,7 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
               Volume (24h)
             </span>
             <p className="text-sm font-semibold sm:text-base">
-              ${coin.total_volume.toLocaleString()}
+              {formatDollarAmount(coin.total_volume)}
             </p>
           </div>
         </div>
@@ -109,13 +110,14 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
             24h Low / High
           </span>
           <p className="text-sm font-semibold sm:text-base">
-            ${coin.low_24h.toLocaleString()} / ${coin.high_24h.toLocaleString()}
+            {formatDollarAmount(coin.low_24h)} /{" "}
+            {formatDollarAmount(coin.high_24h)}
           </p>
         </div>
         <div className="flex flex-col items-end">
           <Chip
             variant={weeklyChipVariant}
-            text={`${coin.price_change_percentage_7d_in_currency.toFixed(2)}%`}
+            text={formatPercentage(coin.price_change_percentage_7d_in_currency)}
           />
           <span className="text-xs text-muted-foreground mt-1">7d change</span>
         </div>
