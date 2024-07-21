@@ -2,7 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import Chip from "./Chip";
-import { DollarSign, BarChart2 } from "lucide-react";
+import { DollarSign, BarChart2, GripVertical } from "lucide-react";
+import { useDraggable } from "@dnd-kit/core";
 import { WatchListButton } from "./WatchListButton";
 
 interface CoinData {
@@ -22,15 +23,34 @@ interface CoinData {
 
 interface CoinCardProps {
   coin: CoinData;
+  isDragging?: boolean;
 }
 
-const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
+const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
   const chipVariant = coin.price_change_percentage_24h >= 0 ? "profit" : "loss";
   const weeklyChipVariant =
     coin.price_change_percentage_7d_in_currency >= 0 ? "profit" : "loss";
 
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: coin.id,
+    data: coin,
+  });
+
+  const style =
+    transform && !isDragging
+      ? {
+          transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        }
+      : undefined;
+
   return (
-    <div className="bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300">
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300 ${
+        isDragging ? "opacity-50" : ""
+      }`}
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <Image
@@ -47,10 +67,17 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
             </span>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
-            Rank #{coin.market_cap_rank}
-          </div>
+        <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
+          Rank #{coin.market_cap_rank}
+        </div>
+        <div
+          {...attributes}
+          {...listeners}
+          className="cursor-move hidden sm:block"
+        >
+          <GripVertical className="w-6 h-6 text-muted-foreground" />
+        </div>
+        <div className="block sm:hidden">
           <WatchListButton
             id={coin.id}
             name={coin.name}
@@ -59,7 +86,6 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
           />
         </div>
       </div>
-
       <div className="flex justify-between items-end mb-4">
         <div>
           <span className="text-xl font-bold sm:text-2xl">
@@ -74,7 +100,6 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
           <span className="text-xs text-muted-foreground mt-1">24h change</span>
         </div>
       </div>
-
       <div className="flex flex-col mb-4">
         <div className="flex items-start mb-2">
           <DollarSign className="w-4 h-4 mr-2 text-muted-foreground mt-1" />
@@ -99,7 +124,6 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
           </div>
         </div>
       </div>
-
       <div className="flex justify-between items-end">
         <div>
           <span className="text-xs text-muted-foreground sm:text-sm">
@@ -121,4 +145,4 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
   );
 };
 
-export default WatchListCoinCard;
+export default CoinCard;

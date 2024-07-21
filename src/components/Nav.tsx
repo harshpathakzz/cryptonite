@@ -14,7 +14,7 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 sm:relative sm:bottom-auto sm:left-auto sm:transform-none bg-primary-foreground rounded-full sm:rounded-md shadow-lg px-6 py-3 z-50">
+    <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 sm:relative sm:bottom-auto sm:left-auto sm:transform-none bg-primary-foreground rounded-full sm:rounded-md shadow-lg px-6 py-3 z-50 mx-4">
       <ul className="flex space-x-8">
         {navItems.map(({ icon: Icon, href, label }) => (
           <li key={href}>
