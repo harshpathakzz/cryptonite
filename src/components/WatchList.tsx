@@ -37,7 +37,9 @@ export default function Watchlist() {
       }}
     >
       <h2 className="text-xl font-bold p-4 sticky top-0 bg-background z-10 border-b">
-        Watchlist
+        Watchlist{" "}
+        <span className="text-muted-foreground">({watchlist.length})</span>
+        <span className="text-sm text-muted-foreground"> (Drag & Drop)</span>
       </h2>
       <div className="flex-1 overflow-y-auto p-4">
         <ul>

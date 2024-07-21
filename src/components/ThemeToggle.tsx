@@ -9,7 +9,7 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      className="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2"
     >
       {theme === "light" ? <Moon /> : <Sun />}
     </button>
