@@ -1,4 +1,5 @@
 import axios from "@/lib/axios";
+import exp from "constants";
 
 export const searchCoin = async (query: string) => {
   const response = await axios.get(`/search?query=${query}`);
@@ -58,4 +59,9 @@ export const getTrendingCoins = async () => {
 export const getPublicCompaniesHoldings = async (query: string) => {
   const response = await axios.get(`/companies/public_treasury/${query}`);
   return response.data;
+};
+
+export const getGlobalData = async () => {
+  const response = await axios.get(`/global`);
+  return response.data.data;
 };
