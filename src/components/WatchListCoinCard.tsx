@@ -1,9 +1,11 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
 import Chip from "./Chip";
 import { DollarSign, BarChart2 } from "lucide-react";
 import { WatchListButton } from "./WatchListButton";
+import { formatDollarAmount, formatPercentage } from "@/utils/formatters";
 
 interface CoinData {
   id: string;
@@ -59,29 +61,27 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
           />
         </div>
       </div>
-
       <div className="flex justify-between items-end mb-4">
         <div>
           <span className="text-2xl font-bold">
-            ${coin.current_price.toLocaleString()}
+            {formatDollarAmount(coin.current_price)}
           </span>
         </div>
         <div className="flex flex-col items-end">
           <Chip
             variant={chipVariant}
-            text={`${coin.price_change_percentage_24h.toFixed(2)}%`}
+            text={formatPercentage(coin.price_change_percentage_24h)}
           />
           <span className="text-xs text-muted-foreground mt-1">24h change</span>
         </div>
       </div>
-
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="flex items-start">
           <DollarSign className="w-5 h-5 mr-2 text-muted-foreground" />
           <div>
             <span className="text-sm text-muted-foreground">Market Cap</span>
             <p className="text-base font-semibold">
-              ${coin.market_cap.toLocaleString()}
+              {formatDollarAmount(coin.market_cap)}
             </p>
           </div>
         </div>
@@ -90,23 +90,23 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
           <div>
             <span className="text-sm text-muted-foreground">Volume (24h)</span>
             <p className="text-base font-semibold">
-              ${coin.total_volume.toLocaleString()}
+              {formatDollarAmount(coin.total_volume)}
             </p>
           </div>
         </div>
       </div>
-
       <div className="flex justify-between items-end pt-4 border-t border-card-foreground/10">
         <div>
           <span className="text-sm text-muted-foreground">24h Low / High</span>
           <p className="text-base font-semibold">
-            ${coin.low_24h.toLocaleString()} / ${coin.high_24h.toLocaleString()}
+            {formatDollarAmount(coin.low_24h)} /{" "}
+            {formatDollarAmount(coin.high_24h)}
           </p>
         </div>
         <div className="flex flex-col items-end">
           <Chip
             variant={weeklyChipVariant}
-            text={`${coin.price_change_percentage_7d_in_currency.toFixed(2)}%`}
+            text={formatPercentage(coin.price_change_percentage_7d_in_currency)}
           />
           <span className="text-xs text-muted-foreground mt-1">7d change</span>
         </div>
