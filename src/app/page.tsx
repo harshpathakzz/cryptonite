@@ -14,7 +14,7 @@ export default function Home() {
           <div className="sm:w-1/2 mb-2 md:mb-0 w-full flex flex-col justify-start h-full">
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 text-primary">
               CRYPTONITE:{" "}
-              <span className="text-accent">Your Crypto Superpower</span>
+              <span className="text-[#82CA9D]">Your Crypto Superpower</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-6">
               Track, analyze, and conquer the crypto market with ease!
