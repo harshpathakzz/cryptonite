@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Cryptonite
 
-## Getting Started
+Cryptonite is a cryptocurrency tracking application that uses the CoinGecko API to provide real-time information on various cryptocurrencies. Built with Next.js, Tailwind CSS, and TypeScript, it offers a modern and responsive user interface with dynamic features.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js
+- Tailwind CSS
+- TypeScript
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Suggestive Search Bar**
+   - Implements debounce for efficient API calls
+   - Provides real-time suggestions as you type
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. **Drag and Drop Functionality**
+   - Easily add cryptocurrencies to your tracking list
+   - Rearrange tracked cryptocurrencies with intuitive drag and drop
 
-## Learn More
+3. **Real-time Data Updates**
+   - Automatically refetches data every 1 minute
+   - Ensures you always see the latest prices and market information
 
-To learn more about Next.js, take a look at the following resources:
+4. **Caching Implementation**
+   - Optimizes performance by caching frequently accessed data
+   - Reduces unnecessary API calls
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Dynamic Theme Switching**
+   - Supports both dark and light modes
+   - Seamlessly switch between themes for comfortable viewing in any environment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+6. **API Rate Limit Handling**
+   - Gracefully handles CoinGecko API rate limits
+   - Displays appropriate error messages to users when limits are reached
 
-## Deploy on Vercel
+7. **Comprehensive Cryptocurrency Graphs**
+   - Displays interactive charts for each cryptocurrency
+   - Includes graphs for daily, weekly, monthly, and yearly price trends
+   - Visualizes market capitalization over time
+   - Shows trading volume fluctuations
+   - Allows users to toggle between different time frames and metrics for detailed analysis
+   
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Follow these steps to set up the Cryptonite application on your local machine:
+
+1. **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/harshpathakzz/cryptonite.git
+    ```
+
+2. **Navigate to the Project Directory:**
+
+    ```bash
+    cd cryptonite
+    ```
+
+3. **Install Dependencies:**
+
+    Install the necessary dependencies for the project:
+
+    ```bash
+    npm install
+    ```
+
+4. **Set Up Environment Variables:**
+
+    Create a .env file in the project root and add your CoinGecko API key:
+
+    ```bash
+    NEXT_PUBLIC_API_KEY=your_coingecko_api_key
+    ```
+
+5. **Run the Development Server:**
+
+    Start the Next.js development server:
+
+    ```bash
+    npm run dev
+    ```
+
+    After running this command, the application will be available locally at [http://localhost:3000](http://localhost:3000).
+
+
+### Home Page
+
+![image](https://github.com/user-attachments/assets/a50af8e0-a143-42b7-bd2e-f0dcbb3b8fcc)
+
+### Trending Page
+
+![image](https://github.com/user-attachments/assets/cc0c5d02-af49-415b-8ef4-52f2556cc196)
+
+### Explore Page
+
+![image](https://github.com/user-attachments/assets/99297d79-bf3b-4db7-b1dc-663a46726316)
+
+
+### WatchList Page
+
+![image](https://github.com/user-attachments/assets/3a03de68-2cf7-483f-97fa-12f233064835)
+
+### Coin Page
+
+![image](https://github.com/user-attachments/assets/635ee876-9365-4dde-9a02-1e86fd6bf2c0)
+
+
+
+
+
+
