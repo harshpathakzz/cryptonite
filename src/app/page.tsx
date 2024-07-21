@@ -3,11 +3,12 @@ import SearchBar from "@/components/SearchBar";
 import PublicCompaniesHoldings from "@/components/PublicCompaniesHoldings";
 import Header from "@/components/Header";
 import GlobalChart from "@/components/GlobalChart";
+
 export default function Home() {
   return (
     <>
       <Header />
-      <div>
+      <div className="w-1/2 flex ">
         <GlobalChart />
       </div>
       <div className="flex justify-center">

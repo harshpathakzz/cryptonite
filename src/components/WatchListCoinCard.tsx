@@ -30,25 +30,25 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
     coin.price_change_percentage_7d_in_currency >= 0 ? "profit" : "loss";
 
   return (
-    <div className="bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-card rounded-lg shadow-md p-4 flex flex-col border border-card-foreground/20 hover:shadow-lg transition-all duration-300">
+      <div className="flex items-center justify-between mb-4 pb-4 border-b border-card-foreground/10">
         <div className="flex items-center">
           <Image
             src={coin.image}
             alt={coin.name}
-            width={32}
-            height={32}
+            width={40}
+            height={40}
             className="rounded-full mr-3"
           />
           <div>
-            <h2 className="text-base font-bold sm:text-lg">{coin.name}</h2>
-            <span className="text-xs text-muted-foreground sm:text-sm">
+            <h2 className="text-lg font-bold">{coin.name}</h2>
+            <span className="text-sm text-muted-foreground">
               {coin.symbol.toUpperCase()}
             </span>
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
+          <div className="text-sm font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded">
             Rank #{coin.market_cap_rank}
           </div>
           <WatchListButton
@@ -62,7 +62,7 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
 
       <div className="flex justify-between items-end mb-4">
         <div>
-          <span className="text-xl font-bold sm:text-2xl">
+          <span className="text-2xl font-bold">
             ${coin.current_price.toLocaleString()}
           </span>
         </div>
@@ -75,37 +75,31 @@ const WatchListCoinCard: React.FC<CoinCardProps> = ({ coin }) => {
         </div>
       </div>
 
-      <div className="flex flex-col mb-4">
-        <div className="flex items-start mb-2">
-          <DollarSign className="w-4 h-4 mr-2 text-muted-foreground mt-1" />
+      <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="flex items-start">
+          <DollarSign className="w-5 h-5 mr-2 text-muted-foreground" />
           <div>
-            <span className="text-xs text-muted-foreground sm:text-sm">
-              Market Cap
-            </span>
-            <p className="text-sm font-semibold sm:text-base">
+            <span className="text-sm text-muted-foreground">Market Cap</span>
+            <p className="text-base font-semibold">
               ${coin.market_cap.toLocaleString()}
             </p>
           </div>
         </div>
         <div className="flex items-start">
-          <BarChart2 className="w-4 h-4 mr-2 text-muted-foreground mt-1" />
+          <BarChart2 className="w-5 h-5 mr-2 text-muted-foreground" />
           <div>
-            <span className="text-xs text-muted-foreground sm:text-sm">
-              Volume (24h)
-            </span>
-            <p className="text-sm font-semibold sm:text-base">
+            <span className="text-sm text-muted-foreground">Volume (24h)</span>
+            <p className="text-base font-semibold">
               ${coin.total_volume.toLocaleString()}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-between items-end">
+      <div className="flex justify-between items-end pt-4 border-t border-card-foreground/10">
         <div>
-          <span className="text-xs text-muted-foreground sm:text-sm">
-            24h Low / High
-          </span>
-          <p className="text-sm font-semibold sm:text-base">
+          <span className="text-sm text-muted-foreground">24h Low / High</span>
+          <p className="text-base font-semibold">
             ${coin.low_24h.toLocaleString()} / ${coin.high_24h.toLocaleString()}
           </p>
         </div>
