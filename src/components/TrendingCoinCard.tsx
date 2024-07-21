@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Chip from "@/components/Chip";
 import { useDraggable } from "@dnd-kit/core";
+import { WatchListButton } from "@/components/WatchListButton";
 import { DollarSign, BarChart2, GripVertical } from "lucide-react";
 
 interface TrendingCoinCardProps {
@@ -64,8 +65,22 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
                 </span>
               </div>
             </div>
-            <div {...attributes} {...listeners} className="cursor-move">
+            <div
+              {...attributes}
+              {...listeners}
+              className="cursor-move hidden sm:block"
+            >
               <GripVertical className="w-6 h-6 text-muted-foreground" />
+            </div>
+            <div className="block sm:hidden">
+              <WatchListButton
+                id={coin.item.id}
+                name={coin.item.name}
+                price_change_percentage_24h={
+                  coin.item.data.price_change_percentage_24h.usd
+                }
+                symbol={coin.item.symbol}
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">

@@ -11,6 +11,7 @@ import { DollarSign, BarChart3, Coins, ArrowUp, ArrowDown } from "lucide-react";
 import PriceCard from "@/components/PriceCard";
 import InfoCard from "@/components/InfoCard";
 import CoinPageSkeleton from "@/components/CoinPageSkeleton";
+import { WatchListButton } from "@/components/WatchListButton";
 
 interface CoinPageProps {
   params: {
@@ -82,19 +83,31 @@ const CoinPage: React.FC<CoinPageProps> = ({ params }) => {
         data && (
           <>
             <div className="bg-card rounded-lg shadow-md p-6 flex flex-col border m-2">
-              <div className="flex items-center mb-4">
-                <Image
-                  src={data.image.large}
-                  alt={data.name}
-                  width={100}
-                  height={100}
-                  className="rounded-full mr-4"
-                />
-                <div className="flex flex-col">
-                  <h2 className="text-2xl font-bold">{data.name}</h2>
-                  <span className="text-lg text-muted-foreground">
-                    ({data.symbol.toUpperCase()})
-                  </span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center mb-4">
+                  <Image
+                    src={data.image.large}
+                    alt={data.name}
+                    width={100}
+                    height={100}
+                    className="rounded-full mr-4"
+                  />
+                  <div className="flex flex-col">
+                    <h2 className="text-2xl font-bold">{data.name}</h2>
+                    <span className="text-lg text-muted-foreground">
+                      ({data.symbol.toUpperCase()})
+                    </span>
+                  </div>
+                </div>
+                <div className="mr-5">
+                  <WatchListButton
+                    id={data.id}
+                    name={data.name}
+                    price_change_percentage_24h={
+                      data.market_data.price_change_percentage_24h
+                    }
+                    symbol={data.symbol}
+                  />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
