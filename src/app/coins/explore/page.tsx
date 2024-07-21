@@ -38,9 +38,30 @@ export default function ExplorePage() {
           <div className="w-full">
             <ul className="list-none p-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {data?.map((coin: any) => (
-                <Link href={`/coins/${coin.id}`} key={coin.id}>
-                  <CoinCard key={coin.id} coin={coin} />
-                </Link>
+                <div
+                  key={coin.id}
+                  draggable={true}
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData(
+                      "text/plain",
+                      JSON.stringify({
+                        id: coin.id,
+                        symbol: coin.symbol,
+                        name: coin.name,
+                        price_change_percentage_24h:
+                          coin.price_change_percentage_24h,
+                      })
+                    );
+                    console.log("dragging", coin.id);
+                  }}
+                  onDragEnd={() => {
+                    console.log("Drag end");
+                  }}
+                >
+                  <Link href={`/coins/${coin.id}`} key={coin.id}>
+                    <CoinCard key={coin.id} coin={coin} />
+                  </Link>
+                </div>
               ))}
             </ul>
             {isFetching && <p className="text-center">Updating...</p>}

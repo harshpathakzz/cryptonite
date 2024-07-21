@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import Chip from "./Chip";
 import { DollarSign, BarChart2, GripVertical } from "lucide-react";
-import { useDraggable } from "@dnd-kit/core";
 import { WatchListButton } from "./WatchListButton";
 
 interface CoinData {
@@ -31,25 +30,9 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
   const weeklyChipVariant =
     coin.price_change_percentage_7d_in_currency >= 0 ? "profit" : "loss";
 
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: coin.id,
-    data: coin,
-  });
-
-  const style =
-    transform && !isDragging
-      ? {
-          transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-        }
-      : undefined;
-
   return (
     <div
-      ref={setNodeRef}
-      style={style}
-      className={`bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300 ${
-        isDragging ? "opacity-50" : ""
-      }`}
+      className={`bg-card rounded-lg shadow-md p-4 flex flex-col border hover:shadow-lg transition-shadow duration-300 `}
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
@@ -70,11 +53,7 @@ const CoinCard: React.FC<CoinCardProps> = ({ coin, isDragging = false }) => {
         <div className="text-xs font-semibold bg-secondary text-secondary-foreground px-2 py-1 rounded sm:text-sm">
           Rank #{coin.market_cap_rank}
         </div>
-        <div
-          {...attributes}
-          {...listeners}
-          className="cursor-move hidden sm:block"
-        >
+        <div className="cursor-move hidden sm:block">
           <GripVertical className="w-6 h-6 text-muted-foreground" />
         </div>
         <div className="block sm:hidden">
