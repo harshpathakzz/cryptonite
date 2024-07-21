@@ -15,10 +15,25 @@ export default function Watchlist() {
       onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => {
         e.preventDefault();
-        const incomingCoin = JSON.parse(e.dataTransfer.getData("text/plain"));
-        addToWatchlist(incomingCoin);
+        const rawData = e.dataTransfer.getData("text/plain");
+        console.log("Raw dropped data:", rawData);
 
-        console.log(incomingCoin);
+        try {
+          const incomingCoin = JSON.parse(rawData);
+
+          if (
+            incomingCoin &&
+            typeof incomingCoin === "object" &&
+            "id" in incomingCoin
+          ) {
+            addToWatchlist(incomingCoin);
+            console.log("Added to watchlist:", incomingCoin);
+          } else {
+            console.error("Invalid coin data format");
+          }
+        } catch (error) {
+          console.error("Error parsing dropped data:", error);
+        }
       }}
     >
       <h2 className="text-xl font-bold p-4 sticky top-0 bg-background z-10 border-b">
