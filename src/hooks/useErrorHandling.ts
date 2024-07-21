@@ -20,7 +20,7 @@ export function useErrorHandling(isError: boolean, error: unknown) {
         }
       } else {
         if (error.code === "ERR_NETWORK") {
-          toast.error("Network error occurred. Please check your connection.");
+          toast.error("Rate limit reached try after some time");
         } else {
           toast.error(
             "An unexpected network error occurred. Please try again."
