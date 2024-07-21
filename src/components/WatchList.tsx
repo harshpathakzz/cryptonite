@@ -11,7 +11,7 @@ export default function Watchlist() {
 
   return (
     <div
-      className="w-full bg-background border rounded-md h-[60vh] flex flex-col"
+      className="bg-card rounded-lg shadow-md p-4 flex flex-col border border-card-foreground/20 hover:shadow-lg transition-all duration-300"
       onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => {
         e.preventDefault();
