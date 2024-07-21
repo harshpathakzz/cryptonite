@@ -39,9 +39,12 @@ export default function GlobalChart() {
     return (
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">Global Crypto Statistics</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="flex flex-wrap gap-4 mb-8">
           {[...Array(4)].map((_, index) => (
-            <div key={index} className="bg-transparent p-4 rounded shadow">
+            <div
+              key={index}
+              className="flex-1 bg-transparent p-4 rounded shadow min-w-[200px]"
+            >
               <Skeleton className="h-8 w-3/4 mb-2" />
               <Skeleton className="h-10 w-1/2" />
             </div>
@@ -75,8 +78,8 @@ export default function GlobalChart() {
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">Global Crypto Statistics</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="bg-background p-4 rounded shadow border">
+      <div className="flex flex-wrap gap-4 mb-8">
+        <div className="flex-1 bg-background p-4 rounded shadow border min-w-[200px]">
           <h2 className="text-xl font-semibold mb-2">
             Active Cryptocurrencies
           </h2>
@@ -84,11 +87,11 @@ export default function GlobalChart() {
             {data.active_cryptocurrencies.toLocaleString()}
           </p>
         </div>
-        <div className="bg-transparent p-4 rounded shadow border">
+        <div className="flex-1 bg-transparent p-4 rounded shadow border min-w-[200px]">
           <h2 className="text-xl font-semibold mb-2">Markets</h2>
           <p className="text-2xl">{data.markets.toLocaleString()}</p>
         </div>
-        <div className="bg-transparent p-4 rounded shadow border">
+        <div className="flex-1 bg-transparent p-4 rounded shadow border min-w-[200px]">
           <h2 className="text-xl font-semibold mb-2">Total Market Cap (USD)</h2>
           <p className="text-2xl">
             $
@@ -97,7 +100,7 @@ export default function GlobalChart() {
             })}
           </p>
         </div>
-        <div className="bg-transparent p-4 rounded shadow border">
+        <div className="flex-1 bg-transparent p-4 rounded shadow border min-w-[200px]">
           <h2 className="text-xl font-semibold mb-2">Total Volume (USD)</h2>
           <p className="text-2xl">
             $
