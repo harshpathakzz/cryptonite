@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import Chip from "@/components/Chip";
-import { useDraggable } from "@dnd-kit/core";
 import { WatchListButton } from "@/components/WatchListButton";
 import { DollarSign, BarChart2, GripVertical } from "lucide-react";
 
@@ -30,22 +29,10 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
 }) => {
   const priceChange = coin.item.data.price_change_percentage_24h.usd;
   const priceChangeVariant = priceChange >= 0 ? "profit" : "loss";
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: coin.item.id,
-    data: coin,
-  });
-  const style =
-    transform && !isDragging
-      ? { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` }
-      : undefined;
 
   return (
     <div
-      ref={setNodeRef}
-      style={style}
-      className={`bg-background rounded-lg shadow-md p-6 border w-full my-3${
-        isDragging ? "opacity-95" : ""
-      }`}
+      className={`bg-background rounded-lg shadow-md p-6 border w-full my-3`}
     >
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         <div className="flex-grow">
@@ -64,13 +51,6 @@ const TrendingCoinCard: React.FC<TrendingCoinCardProps> = ({
                   {coin.item.symbol}
                 </span>
               </div>
-            </div>
-            <div
-              {...attributes}
-              {...listeners}
-              className="cursor-move hidden sm:block"
-            >
-              <GripVertical className="w-6 h-6 text-muted-foreground" />
             </div>
             <div className="block sm:hidden">
               <WatchListButton

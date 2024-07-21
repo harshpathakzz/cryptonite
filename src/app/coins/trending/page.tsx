@@ -30,9 +30,30 @@ export default function TrendingPage() {
         ) : (
           <div className="w-full">
             {data?.map((coin: any) => (
-              <Link href={`/coins/${coin.item.id}`} key={coin.item.id}>
-                <TrendingCoinCard key={coin.item.id} coin={coin} />
-              </Link>
+              <div
+                key={coin.id}
+                draggable={true}
+                onDragStart={(e) => {
+                  e.dataTransfer.setData(
+                    "text/plain",
+                    JSON.stringify({
+                      id: coin.item.id,
+                      symbol: coin.item.symbol,
+                      name: coin.item.name,
+                      price_change_percentage_24h:
+                        coin.item.data.price_change_percentage_24h.usd,
+                    })
+                  );
+                  console.log("dragging", coin.id);
+                }}
+                onDragEnd={() => {
+                  console.log("Drag end");
+                }}
+              >
+                <Link href={`/coins/${coin.item.id}`} key={coin.item.id}>
+                  <TrendingCoinCard key={coin.item.id} coin={coin} />
+                </Link>
+              </div>
             ))}
           </div>
         )}
